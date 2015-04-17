@@ -33,6 +33,7 @@ namespace OpenTK.Android.Test
 		{
 			base.OnUpdateFrame (e);
 		}
+
 		// This gets called on each frame render
 		protected override void OnRenderFrame (FrameEventArgs e)
 		{

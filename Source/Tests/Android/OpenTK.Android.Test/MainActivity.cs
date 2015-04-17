@@ -34,9 +34,6 @@ namespace OpenTK.Android.Test
 			// Create our OpenGL view, and display it
 			view = new GLView1 (this);
 			SetContentView (view);
-
-
-
 			view.Run ();
 		}
 
