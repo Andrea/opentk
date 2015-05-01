@@ -7,10 +7,12 @@ open System.Linq
 open BuildHelpers
 open Fake.XamarinHelper
 
+let coreSolution = "OpenTK.core.sln";
+let androidSolution = "OpenTK.android.sln";
 Target "core-build" (fun () ->
-    RestorePackages "OpenTK.core.sln"
+    RestorePackages coreSolution
 
-    MSBuild "src/TipCalc/bin/Debug" "Build" [ ("Configuration", "Debug"); ("Platform", "Any CPU") ] [ "OpenTK.core.sln" ] |> ignore
+    MSBuild "Binaries\OpenTK\Debug" "Build" [ ("Configuration", "Debug"); ("Platform", "Any CPU") ] [ coreSolution ] |> ignore
 )
 
 Target "core-tests" (fun () -> 
@@ -18,17 +20,17 @@ Target "core-tests" (fun () ->
 )
 
 Target "android-build" (fun () ->
-    RestorePackages "TipCalc.Android.sln"
+    RestorePackages androidSolution
 
-    MSBuild "src/TipCalc.Android/bin/Release" "Build" [ ("Configuration", "Release") ] [ "TipCalc.Android.sln" ] |> ignore
+    MSBuild "Binaries\OpenTK\Release" "Build" [ ("Configuration", "Release") ] [ androidSolution ] |> ignore
 )
 
 Target "android-package" (fun () ->
     AndroidPackage (fun defaults ->
         {defaults with
-            ProjectPath = "src/TipCalc.Android/TipCalc.Android.csproj"
+            ProjectPath = "Source/OpenTK/OpenTK.Android.csproj"
             Configuration = "Release"
-            OutputPath = "src/TipCalc.Android/bin/Release"
+            OutputPath = "Binaries\OpenTK\Release"
         }) 
     |> AndroidSignAndAlign (fun defaults ->
         {defaults with
@@ -42,28 +44,28 @@ Target "android-package" (fun () ->
 Target "android-uitests" (fun () ->
     AndroidPackage (fun defaults ->
         {defaults with
-            ProjectPath = "src/TipCalc.Android/TipCalc.Android.csproj"
+            ProjectPath = "Source/Tests/Android/OpenTK.Android.Test/OpenTK.Android.Test.csproj"
             Configuration = "Release"
-            OutputPath = "src/TipCalc.Android/bin/Release"
+            OutputPath = "Source/Tests/Android/OpenTK.Android.Test/bin/Release"
         }) |> ignore
 
-    let appPath = Directory.EnumerateFiles(Path.Combine("src", "TipCalc.Android", "bin", "Release"), "*.apk", SearchOption.AllDirectories).First()
+    let appPath = Directory.EnumerateFiles(Path.Combine("Source","Tests", "Android", "OpenTK.Android.Test", "bin", "Release"), "*.apk", SearchOption.AllDirectories).First()
 
     RunUITests appPath
 )
 
-Target "android-testcloud" (fun () ->
-    AndroidPackage (fun defaults ->
-        {defaults with
-            ProjectPath = "src/TipCalc.Android/TipCalc.Android.csproj"
-            Configuration = "Release"
-            OutputPath = "src/TipCalc.Android/bin/Release"
-        }) |> ignore
-
-    let appPath = Directory.EnumerateFiles(Path.Combine("src", "TipCalc.Android", "bin", "Release"), "*.apk", SearchOption.AllDirectories).First()
-
-    getBuildParam "devices" |> RunTestCloudTests appPath
-)
+//Target "android-testcloud" (fun () ->
+//    AndroidPackage (fun defaults ->
+//        {defaults with
+//            ProjectPath = "src/TipCalc.Android/TipCalc.Android.csproj"
+//            Configuration = "Release"
+//            OutputPath = "src/TipCalc.Android/bin/Release"
+//        }) |> ignore
+//
+//    let appPath = Directory.EnumerateFiles(Path.Combine("src", "TipCalc.Android", "bin", "Release"), "*.apk", SearchOption.AllDirectories).First()
+//
+//    getBuildParam "devices" |> RunTestCloudTests appPath
+//)
 
 "core-build"
   ==> "core-tests"
