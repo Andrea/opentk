@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK", "Source\OpenTK\OpenTK.csproj", "{A37A7E14-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK.GLControl", "Source\GLControl\OpenTK.GLControl.csproj", "{A625BE88-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK.Android", "Source\OpenTK\OpenTK.Android.csproj", "{1648ACE1-E7D0-41CB-9A0E-C2A9D76C13A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK.Android.Test", "Source\Tests\Android\OpenTK.Android.Test\OpenTK.Android.Test.csproj", "{213FD1F9-5109-49F9-AA8C-FAC3A70CEA36}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1648ACE1-E7D0-41CB-9A0E-C2A9D76C13A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1648ACE1-E7D0-41CB-9A0E-C2A9D76C13A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1648ACE1-E7D0-41CB-9A0E-C2A9D76C13A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1648ACE1-E7D0-41CB-9A0E-C2A9D76C13A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213FD1F9-5109-49F9-AA8C-FAC3A70CEA36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213FD1F9-5109-49F9-AA8C-FAC3A70CEA36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213FD1F9-5109-49F9-AA8C-FAC3A70CEA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213FD1F9-5109-49F9-AA8C-FAC3A70CEA36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37A7E14-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37A7E14-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37A7E14-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37A7E14-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A625BE88-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A625BE88-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A625BE88-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A625BE88-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
