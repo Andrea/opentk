@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		build.sh = build.sh
 		build.fsx = build.fsx
 		build-helpers.fsx = build-helpers.fsx
-		build.bat = build.bat
+		build.cmd = build.cmd
 	EndProjectSection
 EndProject
 Global

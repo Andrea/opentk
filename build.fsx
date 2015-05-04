@@ -10,13 +10,15 @@ open Fake.XamarinHelper
 let coreSolution = "OpenTK.core.sln";
 let androidSolution = "OpenTK.android.sln";
 Target "core-build" (fun () ->
-    RestorePackages coreSolution
+    //RestorePackages coreSolution
 
-    MSBuild "Binaries\OpenTK\Debug" "Build" [ ("Configuration", "Debug"); ("Platform", "Any CPU") ] [ coreSolution ] |> ignore
+    MSBuild "Binaries\OpenTK\Debug" "Build" [ ("Configuration", "Debug"); ("Platform", "Any CPU") ] [ coreSolution ] 
+    |> ignore
 )
 
 Target "core-tests" (fun () -> 
-    RunNUnitTests "src/TipCalc/bin/Debug/TipCalc.Tests.dll" "src/TipCalc/bin/Debug/testresults.xml"
+    //RunNUnitTests "src/TipCalc/bin/Debug/TipCalc.Tests.dll" "src/TipCalc/bin/Debug/testresults.xml"
+    Console.WriteLine "No tests"
 )
 
 Target "android-build" (fun () ->
@@ -32,12 +34,12 @@ Target "android-package" (fun () ->
             Configuration = "Release"
             OutputPath = "Binaries\OpenTK\Release"
         }) 
-    |> AndroidSignAndAlign (fun defaults ->
-        {defaults with
-            KeystorePath = "tipcalc.keystore"
-            KeystorePassword = "tipcalc" // TODO: don't store this in the build script for a real app!
-            KeystoreAlias = "tipcalc"
-        })
+//    |> AndroidSignAndAlign (fun defaults ->
+//        {defaults with
+//            KeystorePath = "tipcalc.keystore"
+//            KeystorePassword = "tipcalc" // TODO: don't store this in the build script for a real app!
+//            KeystoreAlias = "tipcalc"
+//        })
     |> fun file -> TeamCityHelper.PublishArtifact file.FullName
 )
 
@@ -79,4 +81,4 @@ Target "android-uitests" (fun () ->
 "android-build"
   ==> "android-package"
 
-RunTarget() 
+RunTargetOrDefault "core-build"
