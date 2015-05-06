@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.Views;
 using Android.Util;
+using Size = System.Drawing.Size;
 using System.Threading.Tasks;
 using System.Threading;
 using Javax.Microedition.Khronos.Egl;
@@ -422,6 +423,8 @@ namespace OpenTK.Android
 			public int[] ToConfigAttribs() {
 
 				return new int[] {
+					EGL11.EglSurfaceType, EGL11.EglWindowBit,
+					EGL11.EglRenderableType, OpenTK.Platform.Egl.Egl.OPENGL_BIT,
 					EGL11.EglRedSize, Red,
 					EGL11.EglGreenSize, Green,
 					EGL11.EglBlueSize, Blue,
@@ -445,12 +448,13 @@ namespace OpenTK.Android
 			lostglContext = false;
 
 			egl = EGLContext.EGL.JavaCast<IEGL10> ();
+			var bigGLSupported = OpenTK.Platform.Egl.Egl.BindAPI (OpenTK.Platform.Egl.RenderApi.GL);
 
 			eglDisplay = egl.EglGetDisplay (EGL10.EglDefaultDisplay);
 			if (eglDisplay == EGL10.EglNoDisplay)
 				throw new Exception ("Could not get EGL display" + GetErrorAsString ());
 
-			int[] version = new int[2];
+			int[] version = new int[2]{1, 2};
 			if (!egl.EglInitialize (eglDisplay, version))
 				throw new Exception ("Could not initialize EGL display" + GetErrorAsString ());
 
@@ -488,7 +492,7 @@ namespace OpenTK.Android
 				throw new Exception ("No valid EGL configs found" + GetErrorAsString ());
 			eglConfig = results [0];
 
-			int[] contextAttribs = new int[] { EglContextClientVersion, 2, EGL10.EglNone };
+			int[] contextAttribs = new int[] { EGL10.EglNone };
 			eglContext = egl.EglCreateContext (eglDisplay, eglConfig, EGL10.EglNoContext, contextAttribs);
 			if (eglContext == null || eglContext == EGL10.EglNoContext) {
 				eglContext = null;
