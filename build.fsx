@@ -9,6 +9,7 @@ open Fake.XamarinHelper
 
 let coreSolution = "OpenTK.core.sln";
 let androidSolution = "OpenTK.android.sln";
+
 Target "core-build" (fun () ->
     //RestorePackages coreSolution
 
@@ -22,7 +23,7 @@ Target "core-tests" (fun () ->
 )
 
 Target "android-build" (fun () ->
-    RestorePackages androidSolution
+    //RestorePackages androidSolution
 
     MSBuild "Binaries\OpenTK\Release" "Build" [ ("Configuration", "Release") ] [ androidSolution ] |> ignore
 )
